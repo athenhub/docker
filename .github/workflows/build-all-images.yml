@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  REGISTRY_OWNER: athenhub
+  REGISTRY_OWNER: seongjjun
   VERSION: latest
 
 jobs:
