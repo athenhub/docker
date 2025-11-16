@@ -5,9 +5,8 @@ services:
     image: ghcr.io/athenhub/eureka-server:latest
     container_name: eureka-server
     ports:
-      - "9150:9150"                      # 호스트 9150 -> 컨테이너 9150
+      - "9150:9150"
     environment:
-      # Dockerfile에서 사용하는 HOSTNAME, EUREKA_URL 값
       - HOSTNAME=eureka-server
       - EUREKA_URL=http://eureka-server:9150/eureka
     networks:
@@ -17,11 +16,10 @@ services:
     image: ghcr.io/athenhub/config-server:latest
     container_name: config-server
     depends_on:
-      - eureka-server                    # 유레카 먼저
+      - eureka-server
     ports:
-      - "8888:8888"                      # Config Server 포트 (설정에 맞춰서)
+      - "8888:8888"
     environment:
-      # config-server가 eureka에 클라이언트로 붙는 설정이 있다면 사용
       - EUREKA_URL=http://eureka-server:9150/eureka
     networks:
       - msa-network
@@ -33,11 +31,10 @@ services:
       - eureka-server
       - config-server
     ports:
-      - "8000:8000"                      # 게이트웨이 외부 노출 포트 (프로젝트 포트에 맞춰 수정)
+      - "8080:8080"
     environment:
-      # gateway → eureka, config-server 주소
       - EUREKA_URL=http://eureka-server:9150/eureka
-      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - CONFIG_SERVER_URL=http://config-server:8888
     networks:
       - msa-network
 
