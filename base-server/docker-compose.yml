@@ -18,9 +18,10 @@ services:
     depends_on:
       - eureka-server
     ports:
-      - "8888:8888"
+      - "8888:9100"
     environment:
-      - EUREKA_URL=http://eureka-server:9150/eureka
+      EUREKA_INSTANCE_HOSTNAME: '3.38.80.105'
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka-server:9150/eureka'
     networks:
       - msa-network
 
