@@ -9,6 +9,7 @@ services:
     environment:
       EUREKA_INSTANCE_HOSTNAME: '3.38.80.105'
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka-server:9150/eureka'
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}   # ← .env 값 사용
     networks:
       - msa-network
 
@@ -18,10 +19,12 @@ services:
     depends_on:
       - eureka-server
     ports:
-      - "8888:9100"
+      - "9100:9100"
     environment:
       EUREKA_INSTANCE_HOSTNAME: '3.38.80.105'
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka-server:9150/eureka'
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}   # ← 공통 프로필
+      DB_PASSWORD: ${DB_PASSWORD}
     networks:
       - msa-network
 
@@ -32,10 +35,11 @@ services:
       - eureka-server
       - config-server
     ports:
-      - "8080:9000"
+      - "9000:9000"
     environment:
       EUREKA_INSTANCE_HOSTNAME: '3.38.80.105'
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: 'http://eureka-server:9150/eureka'
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}   # ← 같게 맞춰주기
     networks:
       - msa-network
 
