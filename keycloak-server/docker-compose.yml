@@ -28,6 +28,10 @@ services:
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: ${KC_DB_PASSWORD}
 
+      # Keycloak hostname 변경
+      KC_HOSTNAME: "3.38.80.105"        # EC2 퍼블릭 IP
+      KC_HOSTNAME_PORT: "8900"          # Keycloak 노출 포트
+
       #HTTPS 비활성화(HTTP 허용)
       KC_HOSTNAME_STRICT_HTTPS: "false"
 
