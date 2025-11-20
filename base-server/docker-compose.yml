@@ -46,3 +46,4 @@ services:
 networks:
   msa-network:
     driver: bridge
+    name: msa-network
